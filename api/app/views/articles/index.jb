@@ -1,0 +1,14 @@
+json = {
+    articles: @data.map do |entity|
+      {
+         id: entity.id,
+         name: entity.name,
+         description: entity.description,
+         article_type: entity.article_type,
+         story_name: entity.story.name,
+         created_at: entity.created_at
+      }
+    end
+}
+
+json

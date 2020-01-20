@@ -1,0 +1,52 @@
+version: '3'
+services:
+  frontend:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - rabbitmq
+    logging:
+      driver: none
+
+  api:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./api:/app
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
+
+  websocket-server:
+    stdin_open: true
+    ports:
+      - "3006:3006"
+    tty: true
+    build:
+      context: ./websocket-server
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./websocket-server:/app
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: 'rabbitmq:management'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - ~/docker-data/rabbitmq:/var/lib/rabbitmq
+    logging:
+      driver: none
