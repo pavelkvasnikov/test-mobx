@@ -7,7 +7,7 @@ class Store {
  // articles = [];
 
   initialLoad() {
-     fetch('http://localhost:3001/articles')
+     fetch('http://'+window.location.hostname+':3001/articles')
      .then(response =>
       runInAction(() => response.json())
      )
@@ -23,7 +23,7 @@ class Store {
 
   search(params) {
     console.log(params);
-    fetch('http://localhost:3001/articles?' + new URLSearchParams(params))
+    fetch('http://'+window.location.hostname+':3001/articles?' + new URLSearchParams(params))
     .then(response =>
       runInAction(() => response.json())
     )
