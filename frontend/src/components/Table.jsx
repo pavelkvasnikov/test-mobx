@@ -6,7 +6,7 @@ import { observer } from "mobx-react"
  class Table extends React.Component {
   constructor(props) {
     super(props)
-    let socket = new WebSocket("ws://"+window.location.host+":3006");
+    let socket = new WebSocket("ws://"+window.location.hostname+":3006");
     socket.onmessage = (event) => {
       console.log(event.data);
       if (event.data) {
