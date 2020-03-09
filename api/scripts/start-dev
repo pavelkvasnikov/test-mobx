@@ -1,0 +1,7 @@
+#!/bin/bash
+
+scripts/wait-for -h rabbitmq -p 5672 -t 120
+
+rm -rf tmp/pids
+
+exec bundle exec dotenv puma config.ru -C config/puma.rb

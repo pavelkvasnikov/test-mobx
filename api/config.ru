@@ -2,4 +2,8 @@
 
 require_relative 'config/environment'
 
+Signal.trap 'SIGTERM' do
+  Process.kill('SIGINT', Process.pid)
+end
+
 run Rails.application

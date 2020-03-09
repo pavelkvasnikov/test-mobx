@@ -1,43 +1,47 @@
 class SearchService
+
+  SEARCH_TYPES = [
+      'index',
+      'sort',
+      'like',
+      'group',
+      'group_with_totals'
+  ].freeze
+
+  INDEX_SEARCH_TYPES = SEARCH_TYPES[0..2]
+  GROUP_SEARCH_TYPES = SEARCH_TYPES[3]
+  GROUP_WITH_TOTALS_SEARCH_TYPES = SEARCH_TYPES[4]
+
   def self.call params
-    case params[:search_type]
-    when 'sort'
-      sort params
-    when 'group'
-      group params
-    when 'group_with_totals'
-      group_with_totals
-    when 'like'
-      like params
-    else
-      Article.all
-    end
+    send(params[:search_type].to_sym, params)
+  end
+
+  def self.index params
+    Article.joins(:story).all
   end
 
   def self.sort params
-    Article.order(params[:field] => params[:order].to_sym)
+    Article.joins(:story).order("#{params[:field]} #{params[:order]}")
   end
 
   def self.group params
-    Article.group(params[:field])
+    Article.joins(:story).group_by {|field| field[params[:field]]}
   end
 
-  def self.group_with_totals
+  def self.group_with_totals params
     ActiveRecord::Base.connection.execute("
-      select count(articles.id) as article_count,
-       (
-           select sum(article_type_count)
-            from
-              (select count(articles.article_type) as article_type_count from articles group by articles.article_type)
+      SELECT
+         stories.name,
+         COUNT(articles.name) as article_count,
+         COUNT(DISTINCT articles.article_type) as article_type_count,
+         articles.name,
+         articles.id
 
-               ),
-       stories.name as story_name,
-       stories.id as story_id,
-       (select name from articles where articles.story_id = story_id order by articles.created_at limit 1) as last_article
+      FROM stories
 
-from articles
-inner join stories on articles.story_id = stories.id
-group by stories.name;
+      INNER JOIN articles on articles.story_id = stories.id
+
+      GROUP BY stories.name
 ")
   end
 

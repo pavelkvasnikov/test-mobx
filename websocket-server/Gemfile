@@ -3,3 +3,4 @@ ruby '2.6.0'
 
 gem 'bunny', '>= 2.14.1'
 gem 'em-websocket'
+gem 'dotenv', '~> 2.2.1'

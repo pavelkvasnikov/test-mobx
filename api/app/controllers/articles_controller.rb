@@ -1,8 +1,15 @@
 class ArticlesController < ApplicationController
 
   def index
-    puts "!!! PARAMS #{params}"
-    @data = ::SearchService.call params
+    present 'articles/index'
+  end
+
+  def group
+    present 'articles/group'
+  end
+
+  def group_with_totals
+    present 'articles/group_with_totals'
   end
 
   def create

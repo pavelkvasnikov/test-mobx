@@ -4,6 +4,7 @@ GEM
     amq-protocol (2.3.0)
     bunny (2.14.3)
       amq-protocol (~> 2.3, >= 2.3.0)
+    dotenv (2.2.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -15,6 +16,7 @@ PLATFORMS
 
 DEPENDENCIES
   bunny (>= 2.14.1)
+  dotenv (~> 2.2.1)
   em-websocket
 
 RUBY VERSION

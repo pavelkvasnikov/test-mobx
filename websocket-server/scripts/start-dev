@@ -1,0 +1,5 @@
+#!/bin/bash
+
+scripts/wait-for -h rabbitmq -p 5672 -t 120
+
+exec bundle exec dotenv ruby app.rb

@@ -2,17 +2,13 @@ import React from "react"
 import {observer} from "mobx-react";
 
  class Row extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
-    console.log(this.props.article);
-  }
 
   render() {
     return (
       <tr>
+        <td>
+          {this.props.article.id}
+        </td>
         <td>
           {this.props.article.name}
         </td>

@@ -1,0 +1,25 @@
+en:
+  errors:
+    is_required:          'is required'
+    not_found:            'not found'
+    email_not_found:      'Email not recognised.'
+    email_not_verified:   'Email not verified. Please check your email for a message with activation link.'
+    account_disabled:     'This account is disabled'
+    already_taken:        'is already taken'
+    already_exist:        'is already existing'
+    password_not_match:   'does not match confirmation'
+    passcode_not_match:   'That passcode is not recognised'
+    proposal_facility:    'Proposal facility is disabled for this company. Please go to Details page to check next actions.'
+
+    bool?:                'must be boolean'
+    email?:               'is not valid'
+    password?:            'is not strong enough'
+    in_past?:             'must be in past'
+    in_future?:           'must be in future'
+    earlier_then?:        'must be earlier than the'
+    on_or_later_then?:    'must be on or later than the'
+    parsed_as_date?:      'must be in date format'
+    right_state?:         'must be in correct state'
+    email_not_recognised: 'That email is not recognised'
+    invalid_admin_email_domain: 'System administrators must have valid domain email addresses'
+

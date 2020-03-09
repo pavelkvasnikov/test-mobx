@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.arrow-container {
+  position: relative;
+  left: 20px;
+  width: 10px;
+  height: 10px;
+}
+
+.arrow-container > span {
+  background-size: 100%;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.arrow-up {
+ background-image: url("assets/sort-up.svg");
+}
+
+.arrow-down {
+  top: 12px;
+  background-image: url("assets/down-arrow.svg");
+}
+
+.arrow-disabled {
+  opacity: 0.3;
+}

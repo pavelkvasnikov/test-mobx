@@ -1,8 +1,6 @@
 require 'em-websocket'
 require 'bunny'
 require 'json'
-sleep 30
-puts 'Ready'
 
 EventMachine.run do
   @clients = []
@@ -20,7 +18,6 @@ EventMachine.run do
       end
     end
   end
- # CreateArticleService.call(article: {  name: 'test4', description: 'descr4', article_type: 'insta', story_id: 3 })
 
   EM::WebSocket.start(:host => '0.0.0.0', :port => '3006') do |ws|
     ws.onopen do |handshake|

@@ -1,9 +1,18 @@
 FROM ruby:2.6.0
-WORKDIR /app
-ADD . /app
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
+
+RUN apt-get update -qq && apt-get install -y build-essential netcat
+
+COPY Gemfile* /tmp/
+WORKDIR /tmp
+RUN gem install bundler
 RUN bundle install
-COPY . /app
-RUN rm -f /app/tmp/pids/server.pid
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3001"]
+
+ENV APP_HOME /app/
+
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/tmp
+RUN mkdir $APP_HOME/log
+
+WORKDIR $APP_HOME
+
+ADD . $APP_HOME

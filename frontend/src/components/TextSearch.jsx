@@ -1,9 +1,6 @@
 import React from "react"
 
 export default class TextSearch extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   onInput = (e) => {
     if (e.target.value)

@@ -1,6 +1,5 @@
 class Notification
   def initialize
-    sleep 20
     @conn = Bunny.new('amqp://guest:guest@rabbitmq:5672')
     @conn.start
     @ch = @conn.create_channel
@@ -14,4 +13,4 @@ class Notification
 
 end
 
-::EventTrigger = Notification.new
+::EventTrigger =  Notification.new
