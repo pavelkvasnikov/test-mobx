@@ -4,14 +4,13 @@ import FilterHeader from "./FilterHeader";
 export default class TableContentGrouped extends React.Component {
 
   render() {
-    console.log(this.props.store.grouped_articles);
-
-
+    const header_rows = this.props.fields.slice();
+    header_rows[0].value = `Grouped by ${this.props.store.group_field.field}`
     return (
       <table>
         <tbody>
         <tr>
-          {this.props.fields.map((field) => {
+          {header_rows.map((field) => {
             return (
               <th key={field.field}>
                 <FilterHeader click={this.props.OnClickSort} link_title={field}/>
@@ -19,7 +18,9 @@ export default class TableContentGrouped extends React.Component {
             )
         })}
         </tr>
-        {Object.entries(this.props.store.grouped_articles).map(([article, value]) => {
+        {Object.entries(this.props.store.grouped_articles)
+        .filter(([article, value]) => article !== this.props.store.group_field.field)
+        .map(([article, value]) => {
           return (<tr>
             <td>
               {article}
